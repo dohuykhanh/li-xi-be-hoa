@@ -12,11 +12,26 @@ const countdownNumber = document.getElementById("countdownNumber");
 const cardBox = document.getElementById("cardBox");
 
 function resize() {
-    canvas.width = innerWidth;
-    canvas.height = innerHeight;
-    textCanvas.width = innerWidth;
-    textCanvas.height = innerHeight;
+  const dpr = window.devicePixelRatio || 1;
+
+  const w = document.documentElement.clientWidth;
+  const h = document.documentElement.clientHeight;
+
+  canvas.style.width = w + "px";
+  canvas.style.height = h + "px";
+  canvas.width = w * dpr;
+  canvas.height = h * dpr;
+
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  textCanvas.style.width = w + "px";
+  textCanvas.style.height = h + "px";
+  textCanvas.width = w * dpr;
+  textCanvas.height = h * dpr;
+
+  tctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
+
 resize();
 addEventListener("resize", resize);
 

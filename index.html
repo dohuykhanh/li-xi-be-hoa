@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🧧 Lì Xì May Mắn</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+
+    <h1>🧧 2026 Bé hoa chọn 1 bao lì xì 🧧</h1>
+    <!-- 3 bao lì xì -->
+    <div class="lixi-container" id="lixiContainer">
+        <div class="lixi" data-type="1" onclick="chooseLixi(1)">🧧</div>
+        <div class="lixi" data-type="2" onclick="chooseLixi(2)">🧧</div>
+        <div class="lixi" data-type="3" onclick="chooseLixi(3)">🧧</div>
+    </div>
+
+    <!-- Popup xác nhận -->
+    <div id="popup" class="popup hidden">
+        <div class="popup-content">
+            <p>💖 Bé Hoa có chắc chắn chọn chưa?</p>
+            <div class="popup-actions">
+                <button class="btn yes" onclick="confirmChoice(true)">Có</button>
+                <button class="btn no" onclick="confirmChoice(false)">Không</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Countdown -->
+    <div id="countdownBox" class="countdown hidden">
+        <div class="countdown-title">Món quà của bé là pháo hoa</div>
+        <div id="countdownNumber" class="countdown-number">3</div>
+    </div>
+
+    <!-- Vé / thông báo -->
+    <div id="cardBox" class="card hidden"></div>
+
+    <canvas id="fireworks"></canvas>
+    <canvas id="textCanvas" style="display:none;"></canvas>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- FIX MOBILE TRÀN: viewport chuẩn cho Messenger/WebView -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     <title>🧧 Lì Xì May Mắn</title>
     <link rel="stylesheet" href="style.css" />
 </head>
@@ -11,7 +12,7 @@
 <body>
 
 
-    <h1>🧧 2026 Bé hoa chọn 1 bao lì xì 🧧</h1>
+    <h1>2026 Bé hoa chọn 1 bao lì xì </h1>
     <!-- 3 bao lì xì -->
     <div class="lixi-container" id="lixiContainer">
         <div class="lixi" data-type="1" onclick="chooseLixi(1)">🧧</div>
@@ -36,7 +37,7 @@
         <div id="countdownNumber" class="countdown-number">3</div>
     </div>
 
-    <!-- Vé / thông báo -->
+    <!-- Vé / Thông báo -->
     <div id="cardBox" class="card hidden"></div>
 
     <canvas id="fireworks"></canvas>

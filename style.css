@@ -1,4 +1,7 @@
 body {
+     width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
     margin: 0;
     font-family: Arial, sans-serif;
     background: radial-gradient(circle, #0b1b5e, #020b2d);

@@ -11,11 +11,21 @@ const countdownNumber = document.getElementById("countdownNumber");
 
 const cardBox = document.getElementById("cardBox");
 
+/**
+ * FIX TRÀN MOBILE:
+ * - Messenger/WebView hay làm innerWidth/innerHeight lệch
+ * - Dùng documentElement.clientWidth/Height là an toàn hơn
+ * - Không dùng DPR/transform để tránh lệch toạ độ khiến tụ chữ sai
+ */
 function resize() {
-    canvas.width = innerWidth;
-    canvas.height = innerHeight;
-    textCanvas.width = innerWidth;
-    textCanvas.height = innerHeight;
+    const w = document.documentElement.clientWidth;
+    const h = document.documentElement.clientHeight;
+
+    canvas.width = w;
+    canvas.height = h;
+
+    textCanvas.width = w;
+    textCanvas.height = h;
 }
 resize();
 addEventListener("resize", resize);
@@ -136,7 +146,7 @@ class Particle {
 /* ================= Firework explode ================= */
 function explode(x, y) {
     const hue = Math.random() * 360;
-    for (let i = 0; i < 560; i++) { // FIX: tăng hạt
+    for (let i = 0; i < 560; i++) { // bạn đã tăng và chạy ngon
         const a = Math.random() * Math.PI * 2;
         const s = Math.random() * 6 + 2;
         particles.push(
@@ -150,7 +160,7 @@ function explode(x, y) {
     }
 }
 
-/* ================= Text points (2 dòng – FIX MẤT CHỮ) ================= */
+/* ================= Text points (2 dòng) ================= */
 function getTextPoints() {
     tctx.clearRect(0, 0, textCanvas.width, textCanvas.height);
 
@@ -161,16 +171,24 @@ function getTextPoints() {
     const y1 = textCanvas.height / 2 - 45;
     const y2 = textCanvas.height / 2 + 45;
 
-    const size = Math.max(44, Math.min(84, Math.floor(textCanvas.width / 18)));
-    tctx.font = `900 ${size}px Arial`;
-    tctx.fillText("ANH TI ❤️ BÉ HOA ", textCanvas.width / 2, y1);
+    // FIX MOBILE: font size phụ thuộc vào chiều rộng viewport thật
+    const w = textCanvas.width;
+    const isMobile = w < 520;
 
-    tctx.font = `900 ${Math.floor(size * 1)}px Arial`;
-    tctx.fillText("TIẾP 2026 NHÉ", textCanvas.width / 2, y2);
+    // Trên mobile cho chữ nhỏ hơn để KHÔNG tràn
+    const size = isMobile ?
+        Math.max(26, Math.min(46, Math.floor(w / 10))) :
+        Math.max(44, Math.min(84, Math.floor(w / 18)));
+
+    tctx.font = `900 ${size}px Arial`;
+    tctx.fillText("ANH TI ❤️ BÉ HOA", w / 2, y1);
+
+    tctx.font = `900 ${Math.floor(size * (isMobile ? 0.85 : 1))}px Arial`;
+    tctx.fillText("TIẾP 2026 NHÉ", w / 2, y2);
 
     const img = tctx.getImageData(0, 0, textCanvas.width, textCanvas.height).data;
     const points = [];
-    const step = 6; // FIX: chữ mịn & đủ điểm
+    const step = isMobile ? 7 : 6; // mobile nhẹ hơn chút cho mượt
 
     for (let y = 0; y < textCanvas.height; y += step) {
         for (let x = 0; x < textCanvas.width; x += step) {
@@ -222,7 +240,7 @@ function gatherToText() {
 
 /* ================= Animation loop ================= */
 function animate() {
-    ctx.fillStyle = "rgba(0,0,0,0.12)"; // FIX: giữ chữ rõ
+    ctx.fillStyle = "rgba(0,0,0,0.12)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     for (const p of particles) p.update();

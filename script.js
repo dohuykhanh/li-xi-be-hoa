@@ -146,7 +146,7 @@ class Particle {
 /* ================= Firework explode ================= */
 function explode(x, y) {
     const hue = Math.random() * 360;
-    for (let i = 0; i < 560; i++) { // bạn đã tăng và chạy ngon
+    for (let i = 0; i < 860; i++) { // bạn đã tăng và chạy ngon
         const a = Math.random() * Math.PI * 2;
         const s = Math.random() * 6 + 2;
         particles.push(
